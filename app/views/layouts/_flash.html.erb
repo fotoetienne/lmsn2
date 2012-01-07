@@ -1,0 +1,7 @@
+<% if flash %>
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, :class => alertbox(name) do %>
+      <%= msg %><a class="close">x</a>
+    <% end %>
+  <% end %>
+<% end %>

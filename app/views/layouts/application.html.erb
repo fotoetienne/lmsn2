@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Lmsn2</title>
+  <title>LetMeSingNow,llc</title>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
-  <ul class="hmenu">
-    <%= render 'shared/navigation' %>
-  </ul>
-  <%- flash.each do |name, msg| -%>
-    <%#= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
-    <%= content_tag :div, :class => alertbox(name) do %>
-      <%= msg %><a class="close">x</a>
-    <% end %>
-  <%- end -%>
 
-<%= yield %>
+<div class="container">
+  <div class="row">
+    <div class="twelve columns">
+      <ul class="nav-bar">
+        <%= render 'layouts/navigation' %>
+      </ul>
+      <%= render 'layouts/flash' %>
+
+      <%= yield %>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
