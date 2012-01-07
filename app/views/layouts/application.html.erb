@@ -20,18 +20,26 @@
 </head>
 <body>
 
-<div class="container">
+<div id="header" class="container">
   <div class="row">
-    <div class="twelve columns">
+    <div class="five columns">
+      <%= image_tag "LetMeSingNow.jpg" %>
+    </div>
+    <div class="seven columns">
       <ul class="nav-bar">
+        <li><% image_tag "LetMeSingNow.jpg" %></li>
         <%= render 'layouts/navigation' %>
       </ul>
+    </div>
+  </div>
+</div>
+<div id="main" class="container">
+  <div class="row">
+    <div class="twelve columns">
       <%= render 'layouts/flash' %>
-
       <%= yield %>
     </div>
   </div>
 </div>
-
 </body>
 </html>
