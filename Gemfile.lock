@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/ctran/annotate_models.git
+  revision: 032565653b98e0790ddd8a070579566eb60a850c
+  specs:
+    annotate (2.4.1.beta1)
+
+GIT
   remote: git://github.com/sferik/rails_admin.git
   revision: 77784c80bc900cf9041a0bd608a17bc87ac5bffe
   specs:
@@ -204,6 +210,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate!
   capybara (>= 1.1.1)
   coffee-rails (~> 3.1.1)
   cucumber-rails (>= 1.1.1)
