@@ -1,0 +1,33 @@
+<h1>Listing djs</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>User</th>
+    <th>Public</th>
+    <th>Payed through</th>
+    <th>Free</th>
+    <th>Promocode</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @djs.each do |dj| %>
+  <tr>
+    <td><%= dj.name %></td>
+    <td><%= dj.user_id %></td>
+    <td><%= dj.public %></td>
+    <td><%= dj.payed_through %></td>
+    <td><%= dj.free %></td>
+    <td><%= dj.promocode %></td>
+    <td><%= link_to 'Show', dj %></td>
+    <td><%= link_to 'Edit', edit_dj_path(dj) %></td>
+    <td><%= link_to 'Destroy', dj, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Dj', new_dj_path %>

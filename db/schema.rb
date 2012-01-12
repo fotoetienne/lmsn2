@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120112000517) do
+ActiveRecord::Schema.define(:version => 20120112005608) do
+
+  create_table "djs", :force => true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.boolean  "public",        :default => false
+    t.date     "payed_through"
+    t.boolean  "free",          :default => false
+    t.string   "promocode"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"

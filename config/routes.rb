@@ -1,4 +1,6 @@
 Lmsn2::Application.routes.draw do
+  resources :djs
+
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   root :to => "home#index"

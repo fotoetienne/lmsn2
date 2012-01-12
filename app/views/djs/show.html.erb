@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @dj.name %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @dj.user_id %>
+</p>
+
+<p>
+  <b>Public:</b>
+  <%= @dj.public %>
+</p>
+
+<p>
+  <b>Payed through:</b>
+  <%= @dj.payed_through %>
+</p>
+
+<p>
+  <b>Free:</b>
+  <%= @dj.free %>
+</p>
+
+<p>
+  <b>Promocode:</b>
+  <%= @dj.promocode %>
+</p>
+
+
+<%= link_to 'Edit', edit_dj_path(@dj) %> |
+<%= link_to 'Back', djs_path %>
