@@ -21,6 +21,16 @@ class User < ActiveRecord::Base
       email
     end
   end
+  
+  def account
+    if role == "dj"
+      dj
+    elsif role == "singer"
+      singer
+    else
+      nil
+    end
+  end
 
 end
 # == Schema Information

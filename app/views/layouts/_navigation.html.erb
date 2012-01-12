@@ -11,6 +11,19 @@
       </ul>
     </div>
   </li>
+  <% if current_user.role == 'dj' %>
+    <li>
+    <%= link_to('Preferences', edit_dj_path(current_user.account))  %>
+    </li>
+    <li>
+    <%#= link_to('Songlist', edit_dj_songs_path(current_user.account))  %>
+    </li>
+  <% elsif current_user.role == 'singer' %>
+    <li>
+    <%= link_to('Preferences', edit_singer_path(current_user.account))  %>
+    </li>
+  <% end %>
+
 <% else %>
   <li>
   <%= link_to('Sign up', new_user_registration_path)  %>
