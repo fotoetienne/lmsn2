@@ -1,4 +1,4 @@
-<h1>Listing songs</h1>
+<h1>Listing songs for <%= @dj.name %></h1>
 
 <table>
   <tr>
@@ -21,13 +21,13 @@
     <td><%= song.disc %></td>
     <td><%= song.identifier %></td>
     <td><%= song.notes %></td>
-    <td><%= link_to 'Show', song %></td>
-    <td><%= link_to 'Edit', edit_song_path(song) %></td>
-    <td><%= link_to 'Destroy', song, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Show', [@dj,song] %></td>
+    <td><%= link_to 'Edit', edit_dj_song_path(@dj,song) %></td>
+    <td><%= link_to 'Destroy', [@dj,song], confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Song', new_song_path %>
+<%= link_to 'New Song', new_dj_song_path %>

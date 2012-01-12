@@ -1,7 +1,9 @@
 Lmsn2::Application.routes.draw do
-  resources :songs
 
-  resources :djs
+  resources :djs do
+    resources :songs
+  end
+
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
