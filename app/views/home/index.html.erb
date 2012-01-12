@@ -1,4 +1,9 @@
-<h3>Home</h3>
-<%# @users.each do |user| %>
-  <p>User: <%#=link_to user.email, user %></p>
-<%# end %>
+<h1>Sign Up for Karaoke from your phone!</h1>
+
+  <p>
+    LetMeSingNow gives dj's the cutting edge technology to make their song list digital. Singers can browse your songlist and sign up to sing - all from their phone! No more paper slips or waiting in line for a song book. Come and join the future of karaoke.
+  </p>
+
+<%= link_to "Sign up now!", new_user_registration_path, :class => "nice red radius button" %>
+<%= link_to "Find a DJ", djs_path, :class => "nice grey button" %>
+
