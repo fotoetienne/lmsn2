@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Dj:</b>
+  <%= @song.dj_id %>
+</p>
+
+<p>
+  <b>Artist:</b>
+  <%= @song.artist %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @song.title %>
+</p>
+
+<p>
+  <b>Disc:</b>
+  <%= @song.disc %>
+</p>
+
+<p>
+  <b>Identifier:</b>
+  <%= @song.identifier %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%= @song.notes %>
+</p>
+
+
+<%= link_to 'Edit', edit_song_path(@song) %> |
+<%= link_to 'Back', songs_path %>
