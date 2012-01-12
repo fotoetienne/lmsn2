@@ -6,6 +6,22 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :role
+
+  has_one :dj, :dependent => :destroy
+#  has_one :singer, :dependent => :destroy
+
+  def name
+    if role == "dj" and !dj.nil?
+      dj.name || email
+#    elsif role == "singer" and !singer.nil?
+#      singer.name || email
+    elsif role == "admin"
+      email+"(Admin)"
+    else
+      email
+    end
+  end
+
 end
 # == Schema Information
 #
