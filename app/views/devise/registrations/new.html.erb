@@ -12,6 +12,11 @@
   <div><%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation, :class => 'input-text' %></div>
 
+  <div class="field">
+    <%= f.label :role_dj, f.radio_button(:role,"dj")+" I am a dj or karaoke provider." %>
+    <%= f.label :role_singer, f.radio_button(:role,"singer")+" I just want to sing!" %>
+  </div>
+
   <div><%= f.submit "Sign up" %></div>
 <% end %>
 
