@@ -12,30 +12,26 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :dj_id %><br />
-    <%= f.number_field :dj_id %>
-  </div>
-  <div class="field">
-    <%= f.label :artist %><br />
+    <%= f.label :artist %>
     <%= f.text_field :artist %>
   </div>
   <div class="field">
-    <%= f.label :title %><br />
+    <%= f.label :title %>
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :disc %><br />
-    <%= f.text_field :disc %>
-  </div>
-  <div class="field">
-    <%= f.label :identifier %><br />
+    <%= f.label :identifier, "Song-ID" %>
     <%= f.text_field :identifier %>
   </div>
   <div class="field">
-    <%= f.label :notes %><br />
-    <%= f.text_area :notes %>
+    <%= f.label :disc %>
+    <%= f.text_field :disc %>
   </div>
+<!--  <div class="field">
+    <%= f.label :notes %>
+    <%= f.text_area :notes %>
+  </div>-->
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Add Song" %>
   </div>
 <% end %>
