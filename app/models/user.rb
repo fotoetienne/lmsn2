@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :role
 
   has_one :dj, :dependent => :destroy
-#  has_one :singer, :dependent => :destroy
+  has_one :singer, :dependent => :destroy
 
   def name
     if role == "dj" and !dj.nil?
@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
     if role == "dj"
       dj
     elsif role == "singer"
-      singer
+      singer or nil
     else
       nil
     end
