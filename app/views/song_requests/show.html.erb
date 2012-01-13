@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Dj:</b>
+  <%= @song_request.dj_id %>
+</p>
+
+<p>
+  <b>Song:</b>
+  <%= @song_request.song_id %>
+</p>
+
+<p>
+  <b>Singer:</b>
+  <%= @song_request.singer_id %>
+</p>
+
+<p>
+  <b>Singer name:</b>
+  <%= @song_request.singer_name %>
+</p>
+
+<p>
+  <b>Key:</b>
+  <%= @song_request.key %>
+</p>
+
+<p>
+  <b>Comments:</b>
+  <%= @song_request.comments %>
+</p>
+
+<p>
+  <b>Archived:</b>
+  <%= @song_request.archived %>
+</p>
+
+
+<%= link_to 'Edit', edit_song_request_path(@song_request) %> |
+<%= link_to 'Back', song_requests_path %>

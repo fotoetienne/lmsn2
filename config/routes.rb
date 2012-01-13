@@ -1,5 +1,7 @@
 Lmsn2::Application.routes.draw do
 
+  resources :song_requests
+
   resources :singers
 
   resources :djs do
