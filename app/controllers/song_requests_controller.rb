@@ -2,7 +2,13 @@ class SongRequestsController < ApplicationController
   # GET /song_requests
   # GET /song_requests.json
   def index
-    @song_requests = SongRequest.all
+    if current_user.role == 'admin'
+      @song_requests = SongRequest.all
+    elsif current_user.role == 'dj'
+      @song_request = SongRequest.find(current_user.dj)
+    elsif current_user.role == 'singer'
+      @song_request = SongRequest.find(current_user.singer)
+    end  
 
     respond_to do |format|
       format.html # index.html.erb
