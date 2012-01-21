@@ -23,7 +23,7 @@
     </li>
   <% elsif current_user.role == 'singer' and current_user.singer %>
     <li>
-    <%# link_to('Preferences', edit_singer_path(current_user.account))  %>
+    <%= link_to('Preferences', edit_singer_path(current_user.account))  %>
     </li>
   <% end %>
 

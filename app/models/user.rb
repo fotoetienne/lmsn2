@@ -13,8 +13,8 @@ class User < ActiveRecord::Base
   def name
     if role == "dj" and !dj.nil?
       dj.name || email
-#    elsif role == "singer" and !singer.nil?
-#      singer.name || email
+    elsif role == "singer" and !singer.nil?
+      singer.name || email
     elsif role == "admin"
       email+"(Admin)"
     else

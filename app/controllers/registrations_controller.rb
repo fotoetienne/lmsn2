@@ -6,7 +6,8 @@ class RegistrationsController < Devise::RegistrationsController
       dj = resource.create_dj!
       edit_dj_path(dj)
     elsif resource.role == 'singer'
-      new_singer_path
+      singer = resource.create_singer!
+      edit_singer_path(singer)
     end
   end
 
