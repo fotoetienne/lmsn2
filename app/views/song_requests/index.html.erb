@@ -13,8 +13,6 @@
     <% elsif current_user.role == 'singer' %>
       <th>Dj</th>
       <th>Song</th>
-      <th>Key</th>
-      <th>Comments</th>
       <th></th>
       <th></th>
       <th></th>
@@ -38,9 +36,7 @@
       <td><%= link_to 'Destroy', song_request, confirm: 'Are you sure?', method: :delete %></td>
     <% elsif current_user.role == 'singer' %>
       <td><%= link_to dj.name, dj %></td>
-      <td><%= link_to(song.artist+' - '+song.title, song)%></td>
-      <td><%= song_request.key %></td>
-      <td><%= song_request.comments %></td>
+      <td><%= link_to(song.artist+' - '+song.title, [dj,song])%></td>
       <td><%= link_to 'Details', song_request %></td>
       <td><%= link_to 'Edit', edit_song_request_path(song_request) %></td>
       <td><%= link_to 'Destroy', song_request, confirm: 'Are you sure?', method: :delete %></td>
