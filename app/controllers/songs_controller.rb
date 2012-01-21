@@ -88,4 +88,19 @@ class SongsController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  def create_request(singer_name = nil, singer_id = nil)
+    @dj = Dj.find(params[:dj_id])
+    @song = @dj.songs.find(params[:id])
+    if current_user.role == singer
+      singer = current_user.singer    
+    end
+if singer_id
+      singer_name = Singer.find(singer_id).name
+    end
+    request_params = {:singer_id =>   singer_id,
+                      :singer_name => singer_name }
+    @song.song_request.create!(request_params)
+  end
+
 end

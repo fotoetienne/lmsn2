@@ -2,10 +2,16 @@ Lmsn2::Application.routes.draw do
 
   resources :song_requests
 
-  resources :singers
+  resources :singers do
+    resources :song_requests, :except => :new
+  end
 
   resources :djs do
-    resources :songs
+    resources :song_requests, :except => :new
+    resources :songs do
+      match 'sing' => 'song_requests#new'
+      resources :song_requests, :only => :new
+    end
   end
 
 
@@ -13,7 +19,8 @@ Lmsn2::Application.routes.draw do
 
   root :to => "home#index"
   devise_for :users, :controllers => { :registrations => "registrations" }
-#  resources :users, :only => :show
+
+  #  resources :users, :only => :show
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

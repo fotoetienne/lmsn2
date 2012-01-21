@@ -1,8 +1,6 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>Dj:</b>
-  <%= @song.dj_id %>
+  <%= @song.dj.name %>
 </p>
 
 <p>
@@ -31,5 +29,6 @@
 </p>
 
 
+<%= link_to 'Request', new_dj_song_song_request_path(@dj,@song) %> |
 <%= link_to 'Edit', edit_dj_song_path(@dj,@song) %> |
 <%= link_to 'Back', dj_songs_path(@dj) %>

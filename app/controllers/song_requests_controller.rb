@@ -4,10 +4,12 @@ class SongRequestsController < ApplicationController
   def index
     if current_user.role == 'admin'
       @song_requests = SongRequest.all
-    elsif current_user.role == 'dj'
-      @song_request = SongRequest.find(current_user.dj)
+    elsif current_user.role == 'dj' or current_user.role == 'singer'
+      @song_requests = current_user.account.song_requests.all
     elsif current_user.role == 'singer'
-      @song_request = SongRequest.find(current_user.singer)
+      @song_requests = current_user.account.song_requests.all
+    else
+      redirect_to :root and return false
     end  
 
     respond_to do |format|
@@ -30,7 +32,11 @@ class SongRequestsController < ApplicationController
   # GET /song_requests/new
   # GET /song_requests/new.json
   def new
-    @song_request = SongRequest.new
+    request_params = {:dj_id => params[:dj_id], :song_id => params[:song_id]}
+    if user_signed_in? and current_user.role == 'singer'
+      request_params[:singer_id] = current_user.singer.id
+    end
+    @song_request = SongRequest.new(request_params)
 
     respond_to do |format|
       format.html # new.html.erb

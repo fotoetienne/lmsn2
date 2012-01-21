@@ -1,31 +1,50 @@
-<h1>Listing song_requests</h1>
+<h1>Song Requests</h1>
 
 <table>
   <tr>
-    <th>Dj</th>
-    <th>Song</th>
-    <th>Singer</th>
-    <th>Singer name</th>
-    <th>Key</th>
-    <th>Comments</th>
-    <th>Archived</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <% if current_user.role == 'dj' %>
+      <th>Song</th>
+      <th>Singer</th>
+      <th>Key</th>
+      <th>Comments</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    <% elsif current_user.role == 'singer' %>
+      <th>Dj</th>
+      <th>Song</th>
+      <th>Key</th>
+      <th>Comments</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    <% end %>
   </tr>
 
 <% @song_requests.each do |song_request| %>
+  <% song,singer,dj = song_request.song,song_request.singer,song_request.dj %>
   <tr>
-    <td><%= song_request.dj_id %></td>
-    <td><%= song_request.song_id %></td>
-    <td><%= song_request.singer_id %></td>
-    <td><%= song_request.singer_name %></td>
-    <td><%= song_request.key %></td>
-    <td><%= song_request.comments %></td>
-    <td><%= song_request.archived %></td>
-    <td><%= link_to 'Show', song_request %></td>
-    <td><%= link_to 'Edit', edit_song_request_path(song_request) %></td>
-    <td><%= link_to 'Destroy', song_request, confirm: 'Are you sure?', method: :delete %></td>
+    <% if current_user.role == 'dj' %>
+      <td><%= link_to(song.artist+' - '+song.title, song)%></td>
+      <% if singer %>
+        <td><%= link_to song_request.singer_name, singer %>
+      <% else %>
+        <td><%= song_request.singer_name %></td>
+      <% end %>
+      <td><%= song_request.key %></td>
+      <td><%= song_request.comments %></td>
+      <td><%= link_to 'Details', song_request %></td>
+      <td><%= link_to 'Edit', edit_song_request_path(song_request) %></td>
+      <td><%= link_to 'Destroy', song_request, confirm: 'Are you sure?', method: :delete %></td>
+    <% elsif current_user.role == 'singer' %>
+      <td><%= link_to dj.name, dj %></td>
+      <td><%= link_to(song.artist+' - '+song.title, song)%></td>
+      <td><%= song_request.key %></td>
+      <td><%= song_request.comments %></td>
+      <td><%= link_to 'Details', song_request %></td>
+      <td><%= link_to 'Edit', edit_song_request_path(song_request) %></td>
+      <td><%= link_to 'Destroy', song_request, confirm: 'Are you sure?', method: :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>

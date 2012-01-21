@@ -7,7 +7,15 @@ class SongRequest < ActiveRecord::Base
   validates :song_id  ,   :presence => true
   validates :singer_name, :presence => {:unless => "singer_id", :message => "The dj needs to know what name to call!"}
 
+  def singer_name
+    if singer_name
+      singer_name
+    elsif singer_id and singer.name
+      singer.name
+    end
+  end
 end
+
 # == Schema Information
 #
 # Table name: song_requests
