@@ -32,6 +32,18 @@ class User < ActiveRecord::Base
     end
   end
 
+  def is_admin?
+    role == "admin" ? true : false
+  end
+
+  def is_dj?
+    role == "dj" ? true : false
+  end
+
+  def is_singer?
+    role == "singer" ? true : false
+  end
+
 end
 # == Schema Information
 #
