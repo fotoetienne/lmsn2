@@ -1,4 +1,5 @@
 class SongsController < ApplicationController
+  load_and_authorize_resource
   #http://blog.8thcolor.com/2011/08/nested-resources-with-independent-views-in-ruby-on-rails/
   # GET /songs
   # GET /songs.json

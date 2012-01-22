@@ -1,4 +1,5 @@
 class DjsController < ApplicationController
+  load_and_authorize_resource
   # GET /djs
   # GET /djs.json
   def index

@@ -32,15 +32,15 @@ class User < ActiveRecord::Base
     end
   end
 
-  def is_admin?
+  def admin?
     role == "admin" ? true : false
   end
 
-  def is_dj?
+  def dj?
     role == "dj" ? true : false
   end
 
-  def is_singer?
+  def singer?
     role == "singer" ? true : false
   end
 
