@@ -28,6 +28,7 @@ gem "launchy", ">= 2.0.5", :group => :test
 gem "devise", ">= 1.4.9"
 gem "zurb-foundation", :group => :assets
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
+gem 'cancan'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
