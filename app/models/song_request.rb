@@ -10,8 +10,10 @@ class SongRequest < ActiveRecord::Base
   def name
     if singer_name
       singer_name
-    elsif singer_id and singer.name
+    elsif singer and singer.name
       singer.name
+    else
+      "singer_id"
     end
   end
 end

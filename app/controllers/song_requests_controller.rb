@@ -3,11 +3,9 @@ class SongRequestsController < ApplicationController
   # GET /song_requests
   # GET /song_requests.json
   def index
-    if current_user.role == 'admin'
+    if current_user.admin?
       @song_requests = SongRequest.all
-    elsif current_user.role == 'dj' or current_user.role == 'singer'
-      @song_requests = current_user.account.song_requests.all
-    elsif current_user.role == 'singer'
+    elsif current_user.dj? or current_user.singer?
       @song_requests = current_user.account.song_requests.all
     else
       redirect_to :root and return false
