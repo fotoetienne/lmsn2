@@ -4,7 +4,7 @@ class CreateSongRequests < ActiveRecord::Migration
       t.integer :dj_id
       t.integer :song_id
       t.integer :singer_id
-      t.string :singer_name
+      t.string :name
       t.string :key
       t.string :comments
       t.boolean :archived

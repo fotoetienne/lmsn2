@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(:version => 20120113164859) do
     t.integer  "dj_id"
     t.integer  "song_id"
     t.integer  "singer_id"
-    t.string   "singer_name"
+    t.string   "name"
     t.string   "key"
     t.string   "comments"
     t.boolean  "archived"
