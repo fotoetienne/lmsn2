@@ -29,7 +29,11 @@
     <%= link_to('Preferences', edit_singer_path(current_user.account))  %>
     </li>
   <% end %>
-
+  <% if current_user.admin? or Rails.env.development? %>
+    <li>
+    <%= switch_user_select %>
+    </li>
+  <% end %>
 <% else %>
   <li>
   <%= link_to('Sign up', new_user_registration_path)  %>

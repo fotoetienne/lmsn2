@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
       singer.name || email
     elsif role == "admin"
       email+"(Admin)"
+    elsif role == "guest"
+      "Guest"
     else
       email
     end

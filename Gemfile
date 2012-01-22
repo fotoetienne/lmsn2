@@ -29,6 +29,7 @@ gem "devise", ">= 1.4.9"
 gem "zurb-foundation", :group => :assets
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem 'cancan'
+gem 'switch_user'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
