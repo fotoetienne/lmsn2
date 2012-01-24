@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     user ||= User.new(:role == 'guest') # guest user (not logged in)
     #can :manage, User, :id = user.id
-    #can :read, :all
+    can :read, [Dj, Song]
     if user.admin?
       can :manage, :all
       can :access, :rails_admin
