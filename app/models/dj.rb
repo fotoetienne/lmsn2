@@ -4,6 +4,12 @@ class Dj < ActiveRecord::Base
   belongs_to :user
   has_many :songs
   has_many :song_requests
+
+  def load_songlist(fn)
+    songlist = parse_csv(fn)
+    self.songs.create(songlist)
+  end 
+
 end
 # == Schema Information
 #
