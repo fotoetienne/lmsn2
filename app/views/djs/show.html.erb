@@ -1,18 +1,6 @@
-<p>
-  <b>Name:</b>
-  <%= @dj.name %>
-</p>
-
-<p>
-  <b>Public:</b>
-  <%= @dj.public %>
-</p>
-
-<p>
-  <b>Payed through:</b>
-  <%= @dj.payed_through %>
-</p>
-
-<%= link_to 'Songs', dj_songs_path(@dj) %> |
-<%= link_to 'Edit', edit_dj_path(@dj) %> |
-<%= link_to 'Back', djs_path %>
+<h2><%= @dj.name %></h2>
+<ul>
+  <li><%= link_to 'Artists', dj_artists_path(@dj) %></li>
+  <li><%= link_to 'All Songs', dj_songs_path(@dj) %></li>
+  <li><%= link_to 'Back', djs_path %></li>
+</ul>

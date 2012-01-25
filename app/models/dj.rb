@@ -10,6 +10,20 @@ class Dj < ActiveRecord::Base
     self.songs.create(songlist)
   end 
 
+  def artists
+    self.songs.select("distinct(songs.artist)")
+#   self.songs.find_all(:select => 'distinct artist', :order => 'artist')
+  end
+
+# scope :artists, lambda {
+#   joins(:songs).
+#   select(:artist).uniq
+# }
+
+  def songs_by_artist(artist)
+    self.songs.where(:artist => artist).order(:title)
+  end
+
 end
 # == Schema Information
 #

@@ -1,0 +1,8 @@
+<h1><%= @dj.name %> - Artists</h1>
+<%= paginate @artists %>
+<ul>
+<% @artists.each do |artist| %>
+    <li><%= link_to artist.artist, dj_artist_path(@dj,URI.escape(artist.artist,/\W/)) %></li>
+<% end %>
+</ul>
+<%= paginate @artists %>

@@ -12,6 +12,7 @@ Lmsn2::Application.routes.draw do
       match 'sing' => 'song_requests#new'
       resources :song_requests, :only => :new
     end
+    resources :artists, :only => [:index,:show]
   end
 
 
