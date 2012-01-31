@@ -11,7 +11,9 @@ class Dj < ActiveRecord::Base
   end 
 
   def artists
-    self.songs.select("distinct(songs.artist)")
+    self.songs.select("songs.artist,count(*) as count").group(:artist)
+#   self.songs.count(:group => :artist)
+#   self.songs.select("distinct(songs.artist)")
 #   self.songs.find_all(:select => 'distinct artist', :order => 'artist')
   end
 

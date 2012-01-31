@@ -2,7 +2,7 @@
 <%= paginate @artists %>
 <ul>
 <% @artists.each do |artist| %>
-    <li><%= link_to artist.artist, dj_artist_path(@dj,URI.escape(artist.artist,/\W/)) %></li>
+    <li><%= link_to artist.artist+' ('+artist.count.to_s+')', dj_artist_path(@dj,URI.escape(artist.artist,/\W/)) %></li>
 <% end %>
 </ul>
 <%= paginate @artists %>
