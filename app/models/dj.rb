@@ -26,6 +26,18 @@ class Dj < ActiveRecord::Base
     self.songs.where(:artist => artist).order(:title)
   end
 
+  def parse_csv(csvfile)
+    songs = []
+    CSV.foreach(csvfile,{:headers => true, :skip_blanks => true, :header_converters => :symbol}) do |row|
+      this_song = {
+      :artist => row[:artist] || "Unknown Artist",
+      :title => row[:title] || row[:song],
+      :identifier => row[:identifier] || row[:id] || row[:song_id] || nil}
+      songs << this_song unless this_song[:title].nil?
+    end
+    return songs
+  end
+
 end
 # == Schema Information
 #
