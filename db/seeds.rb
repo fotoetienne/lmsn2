@@ -25,6 +25,11 @@ user.dj.songs.create(:artist => 'artist21', :title => 'title21')
 user.dj.songs.create(:artist => 'artist22', :title => 'title22')
 puts 'New user created: ' << user.name
 
+user = User.create(:email => 'sampledj3@letmesingnow.com', :password => 'sampledj3', :password_confirmation => 'sampledj3', :role => 'dj')
+user.create_dj(:name => 'Sample Dj 3')
+user.dj.load_songlist('public/songlist.csv')
+puts 'New user created: ' << user.name
+
 user = User.create(:email => 'singer1@letmesingnow.com', :password => 'singer1', :password_confirmation => 'singer1', :role => 'singer')
 user.create_singer(:name => 'Singer 1')
 puts 'New user created: ' << user.name
