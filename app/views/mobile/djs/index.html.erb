@@ -1,0 +1,6 @@
+<h3>Find a DJ/Karaoke provider</h3>
+<ul data-role="listview" data-inset="true" data-filter="true">
+<% @djs.each do |dj| %>
+    <li><%= link_to dj.name, dj %></li>
+<% end %>
+</ul>

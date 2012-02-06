@@ -2,14 +2,18 @@ require 'csv'
 
 module ApplicationHelper
   def alertbox(name)
-    if name == :alert or name == :error
-      "alert-box error" #red
-    elsif name == :notice
-      "alert-box success" #green
-    elsif name == :yellow
-      "alert-box warning" #yellow
+    if mobile?
+      "ui-bar ui-bar-e" 
     else
-      "alert-box" #grey
+      if name == :alert or name == :error
+        "alert-box error" #red
+      elsif name == :notice
+        "alert-box success" #green
+      elsif name == :yellow
+        "alert-box warning" #yellow
+      else
+        "alert-box" #grey
+      end
     end
   end
 

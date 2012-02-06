@@ -1,0 +1,7 @@
+<% if flash %>
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, :class => alertbox(name) do %>
+      <%= msg %><div style="float:right"><a data-role="button" data-icon="delete" data-iconpos="notext">x</a></div>
+    <% end %>
+  <% end %>
+<% end %>

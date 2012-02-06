@@ -5,7 +5,7 @@ class SongsController < ApplicationController
   # GET /songs.json
   def index
     @dj = Dj.find(params[:dj_id])
-    @songs = @dj.songs.order("artist","title").page(params[:page])
+    @songs = @dj.songs.order("title","artist").page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
