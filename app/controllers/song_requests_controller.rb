@@ -32,6 +32,7 @@ class SongRequestsController < ApplicationController
   # GET /song_requests/new.json
   def new
     request_params = {:dj_id => params[:dj_id], :song_id => params[:song_id]}
+    @song = Song.find(params[:song_id])
     if user_signed_in? and current_user.role == 'singer'
       request_params[:singer_id] = current_user.singer.id
     end
