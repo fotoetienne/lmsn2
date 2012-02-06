@@ -2,8 +2,8 @@ class Dj < ActiveRecord::Base
 #  validates_presence_of :name
 
   belongs_to :user
-  has_many :songs
-  has_many :song_requests
+  has_many :songs, :dependent => :destroy
+  has_many :song_requests, :dependent => :destroy
 
   def load_songlist(fn)
     songlist = parse_csv(fn)

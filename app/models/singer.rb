@@ -1,6 +1,6 @@
 class Singer < ActiveRecord::Base
   belongs_to :user
-  has_many :song_requests
+  has_many :song_requests, :dependent => :destroy
 end
 # == Schema Information
 #
