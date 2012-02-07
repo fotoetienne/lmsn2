@@ -10,6 +10,11 @@ class Dj < ActiveRecord::Base
     self.songs.create(songlist)
   end 
 
+  def load_random_songlist(length=1000)
+    songlist = parse_csv(random_songlist(length))
+    self.songs.create(songlist)
+  end 
+
   def artists
     self.songs.select("songs.artist,count(*) as count").group(:artist)
 #   self.songs.count(:group => :artist)
@@ -36,6 +41,22 @@ class Dj < ActiveRecord::Base
       songs << this_song unless this_song[:title].nil?
     end
     return songs
+  end
+
+  def random_songlist(length=100)
+    infile='public/songlist.csv'
+    outfile='tmp/random_songlist.csv'
+    tlength = `cat #{infile} | wc -l`.to_i
+    File.open(outfile,'w') do |outlist|
+    File.open(infile, 'r') do |inlist|
+      outlist.write(inlist.first)
+      inlist = inlist.readlines
+      length.times do
+        outlist.write(inlist[rand(tlength)])
+      end
+    end
+    end
+    return outfile
   end
 
 end

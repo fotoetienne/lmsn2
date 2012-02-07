@@ -36,7 +36,9 @@ module ApplicationHelper
     dj.songs.create(songlist)
   end
 
-  def random_songlist(infile='public/songlist.csv',outfile='public/songlist10.csv',length=10)
+  def random_songlist(length=100)
+    infile='public/songlist.csv'
+    outfile='tmp/random_songlist.csv'
     tlength = `cat #{infile} | wc -l`.to_i
     File.open(outfile,'w') do |outlist|
     File.open(infile, 'r') do |inlist|
