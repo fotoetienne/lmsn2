@@ -8,11 +8,7 @@ class SongRequest < ActiveRecord::Base
   validates :name, :presence => {:unless => "singer_id", :message => "The dj needs to know what name to call!"}
 
   def singer_name
-    if name != ""
-      name
-    elsif singer and singer.name
-      singer.name
-    end
+    name || singer.name
   end
 end
 
