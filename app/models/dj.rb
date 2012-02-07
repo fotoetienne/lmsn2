@@ -1,7 +1,7 @@
 class Dj < ActiveRecord::Base
 #  validates_presence_of :name
 
-  belongs_to :user
+  belongs_to :user, :dependent => :destroy
   has_many :songs, :dependent => :destroy
   has_many :song_requests, :dependent => :destroy
 

@@ -1,6 +1,6 @@
 class Song < ActiveRecord::Base
   belongs_to :dj
-  has_many :song_requests
+  has_many :song_requests, :dependent => :destroy
   validates_uniqueness_of :identifier, :scope => :dj_id
 end
 # == Schema Information
