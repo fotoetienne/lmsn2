@@ -3,16 +3,24 @@ class SongRequestsController < ApplicationController
   # GET /song_requests
   # GET /song_requests.json
   def index
-    if current_user.admin?
-      @song_requests = SongRequest.all
-    elsif current_user.dj? or current_user.singer?
-      @song_requests = current_user.account.song_requests.all
+    if user_signed_in?
+      if current_user.admin?
+        @song_requests = SongRequest.all
+        template = 'admin_index'
+      elsif current_user.dj? or current_user.singer?
+        @song_requests = current_user.account.song_requests.all
+        template = current_user.role+'_index'
+      else
+        #template = 'guest_index'
+        redirect_to :root and return false
+      end 
     else
+      #template = 'guest_index'
       redirect_to :root and return false
-    end  
+    end
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render template rescue nil}# [role_]index.html.erb
       format.json { render json: @song_requests }
     end
   end
@@ -21,9 +29,18 @@ class SongRequestsController < ApplicationController
   # GET /song_requests/1.json
   def show
     @song_request = SongRequest.find(params[:id])
+    @dj = @song_request.dj
+    @song = @song_request.song
+    @singer = @song_request.singer
+
+    if user_signed_in?
+      template = current_user.role+'_show'
+    else
+      template = 'guest_show'
+    end
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render template rescue nil }# [role_]show.html.erb
       format.json { render json: @song_request }
     end
   end
@@ -32,9 +49,11 @@ class SongRequestsController < ApplicationController
   # GET /song_requests/new.json
   def new
     request_params = {:dj_id => params[:dj_id], :song_id => params[:song_id]}
+    @dj = Dj.find(params[:dj_id])
     @song = Song.find(params[:song_id])
     if user_signed_in? and current_user.role == 'singer'
       request_params[:singer_id] = current_user.singer.id
+      @singer = current_user.singer
     end
     @song_request = SongRequest.new(request_params)
 
@@ -47,6 +66,9 @@ class SongRequestsController < ApplicationController
   # GET /song_requests/1/edit
   def edit
     @song_request = SongRequest.find(params[:id])
+    @dj = @song_request.dj
+    @song = @song_request.song
+    @singer = @song_request.singer
   end
 
   # POST /song_requests
@@ -56,7 +78,7 @@ class SongRequestsController < ApplicationController
 
     respond_to do |format|
       if @song_request.save
-        format.html { redirect_to @song_request, notice: 'Song request was successfully created.' }
+        format.html { redirect_to song_requests_path, notice: 'Song request was successfully created.' }
         format.json { render json: @song_request, status: :created, location: @song_request }
       else
         format.html { render action: "new" }
