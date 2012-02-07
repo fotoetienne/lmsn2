@@ -1,0 +1,61 @@
+<%= form_for(@song_request) do |f| %>
+  <% if @song_request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@song_request.errors.count, "error") %> prohibited this song_request from being saved:</h2>
+
+      <ul>
+      <% @song_request.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :dj_id %>
+  <%= f.hidden_field :song_id %>
+  <%= f.hidden_field :singer_id %>
+<!--
+  <h3>Dj: <%= link_to @dj.name, @dj %></h3>
+  <h3>Artist: <%= link_to(@song.artist, dj_artist_path(@dj,@song.artist)) %></h3>
+  <h3>Song Title: <%= link_to(@song.title, [@dj,@song]) %></h3>
+-->
+
+  <p>
+    <b>Dj:</b>
+    <%= link_to @dj.name, @dj %>
+  </p>
+
+  <p>
+    <b>Artist:</b>
+    <%= link_to(@song.artist, dj_artist_path(@dj,@song.artist)) %>
+  </p>
+
+  <p>
+    <b>Song Title:</b>
+    <%= link_to(@song.title, [@dj,@song]) %>
+  </p>
+
+  <% if @singer %>
+    <!--  <h3>Singer: <%= link_to @singer.name, edit_singer_path(@singer) %><br/>-->
+    <p>
+      <b>Singer:</b>
+      <%= link_to @singer.name, edit_singer_path(@singer) %>
+    </p>
+  <% else %>
+    <div class="field">
+      <%= f.label "Singer's Name" %>
+      <%= f.text_field :name %>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label "Key Change Request" %>
+    <%= f.text_field :key %>
+  </div>
+  <div class="field">
+    <%= f.label "Additional Comments" %>
+    <%= f.text_field :comments %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

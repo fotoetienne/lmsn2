@@ -1,0 +1,31 @@
+<h2>Song Request</h2>
+<%= render 'form' %>
+<!--
+<p>
+  <b>Dj:</b>
+  <%= @dj.name %>
+</p>
+
+<p>
+  <b>Song:</b>
+  <%= @song.artist+' - '+@song.title %>
+</p>
+
+<p>
+  <b>Singer:</b>
+  <%= @song_request.name %>
+</p>
+
+<p>
+  <b>Key:</b>
+  <%= @song_request.key %>
+</p>
+
+<p>
+  <b>Comments:</b>
+  <%= @song_request.comments %>
+</p>
+<%= link_to 'Change this Request', edit_song_request_path(@song_request), 'data-role' => 'button' %>
+-->
+<%= link_to 'Cancel Request', @song_request, 'data-role' => 'button', confirm: 'Are you sure?', method: :delete %>
+<%= link_to 'View all requests', song_requests_path, 'data-role' => 'button' %>
