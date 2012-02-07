@@ -1,15 +1,15 @@
 Lmsn2::Application.routes.draw do
 
-  resources :song_requests
-
-  resources :singers do
-    resources :song_requests, :except => :new
+  resources :song_requests do
+    get 'archive', :on => :member
+    get 'unarchive', :on => :member
   end
 
+  resources :singers
+
   resources :djs do
-    resources :song_requests, :except => :new
     resources :songs do
-      match 'sing' => 'song_requests#new'
+      match 'request' => 'song_requests#new'
       resources :song_requests, :only => :new
     end
     resources :artists, :only => [:index,:show]

@@ -8,7 +8,7 @@ class SongRequestsController < ApplicationController
         @song_requests = SongRequest.all
         template = 'admin_index'
       elsif current_user.dj? or current_user.singer?
-        @song_requests = current_user.account.song_requests.all
+        @song_requests = current_user.account.song_requests.where(:archived => false)
         template = current_user.role+'_index'
       else
         #template = 'guest_index'
@@ -109,6 +109,30 @@ class SongRequestsController < ApplicationController
     @song_request = SongRequest.find(params[:id])
     @song_request.destroy
 
+    respond_to do |format|
+      format.html { redirect_to song_requests_url }
+      format.json { head :ok }
+    end
+  end
+  
+  # GET /song_requests/1/archive
+  # GET /song_requests/1/archive.json
+  def archive
+    @song_request = SongRequest.find(params[:id])
+    @song_request.update_attributes({:archived => true})
+    
+    respond_to do |format|
+      format.html { redirect_to song_requests_url }
+      format.json { head :ok }
+    end
+  end
+
+  # GET /song_requests/1/unarchive
+  # GET /song_requests/1/unarchive.json
+  def unarchive
+    @song_request = SongRequest.find(params[:id])
+    @song_request.update_attributes({:archived => false})
+    
     respond_to do |format|
       format.html { redirect_to song_requests_url }
       format.json { head :ok }

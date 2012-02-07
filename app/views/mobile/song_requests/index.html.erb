@@ -7,10 +7,20 @@
     <% song,singer,dj = song_request.song,song_request.singer,song_request.dj %>
     <li>
       <% if current_user.dj? %>
+        <%= link_to song_request do %>
+          <h3><%= song.artist+' - '+song.title %></h3>
+          <p>Singer: <%= song_request.name %><br/>
+          <%= 'Key: '+song_request.key unless song_request.key.empty? %>
+          <%= 'Comments: '+song_request.comments unless song_request.comments.empty? %>
+          </p>
+        <% end %>
+        <%= link_to 'Dismiss', archive_song_request_path(song_request), 'data-icon' => 'check' %>
+        <!--
         <td><%= link_to(song.artist+' - '+song.title, [dj,song])%></td>
         <td><%= singer ? link_to(singer.name, singer) : song_request.singer_name %>
         <td><%= song_request.key %></td>
         <td><%= song_request.comments %></td>
+        -->
       <% elsif current_user.singer? %>
         <%= link_to song_request do %>
           <h3><%= song.artist+' - '+song.title %></h3>
@@ -18,9 +28,16 @@
           </p>
         <% end %>
       <% elsif current_user.admin? %>
-        <td><%= link_to dj.name, dj %></td>
-        <td><%= singer ? link_to(singer.name, singer) : song_request.singer_name %>
-        <td><%= link_to(song.artist+' - '+song.title, [dj,song])%></td>
+        <%= link_to song_request do %>
+          <h3><%= song.artist+' - '+song.title %></h3>
+          <p>Dj: <%= dj.name %>
+          Singer: <%= song_request.name %><br/>
+          <%= 'Key: '+song_request.key unless song_request.key.empty? %>
+          <%= 'Comments: '+song_request.comments unless song_request.comments.empty? %>
+          </p>
+        <% end %>
+        <%= link_to 'Restore', unarchive_song_request_path(song_request), 'data-icon' => 'delete' if song_request.archived %>
+        <%= link_to 'Dismiss', archive_song_request_path(song_request), 'data-icon' => 'check' unless song_request.archived %>
       <% end %>
         <!--
         <td><%= link_to 'Details', song_request %></td>

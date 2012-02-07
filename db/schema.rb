@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(:version => 20120113164859) do
     t.string   "name"
     t.string   "key"
     t.string   "comments"
-    t.boolean  "archived"
+    t.boolean  "archived",      :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
