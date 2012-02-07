@@ -2,9 +2,10 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    user ||= User.new(:role == 'guest') # guest user (not logged in)
-    #can :manage, User, :id = user.id
+    user ||= User.new(:role => 'guest') # guest user (not logged in)
+    can :manage, User, :id => user.id
     can :read, [Dj, Song]
+    can [:create, :read], SongRequest
     if user.admin?
       can :manage, :all
       can :access, :rails_admin
@@ -12,6 +13,7 @@ class Ability
       can :manage, Dj, :user_id => user.id
       can :manage, Song, :dj_id => user.dj.id
       can :manage, SongRequest, :dj_id => user.dj.id
+      can :read,   Singer
     elsif user.singer?
       can :manage, Singer, :user_id => user.id
       can :manage, SongRequest, :singer_id => user.singer.id
