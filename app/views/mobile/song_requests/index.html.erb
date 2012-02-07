@@ -9,9 +9,9 @@
       <% if current_user.dj? %>
         <%= link_to song_request do %>
           <h3><%= song.artist+' - '+song.title %></h3>
-          <p>Singer: <%= song_request.singer_name %><br/>
-          <%= 'Key: '+song_request.key unless song_request.key.empty? %>
-          <%= 'Comments: '+song_request.comments unless song_request.comments.empty? %>
+          <p>Singer: <%= song_request.singer_name %>
+          <%= '<br/>Key: '.html_safe+song_request.key unless song_request.key.empty? %>
+          <%= '<br/>Comments: '.html_safe+song_request.comments unless song_request.comments.empty? %>
           </p>
         <% end %>
         <%= link_to 'Dismiss', archive_song_request_path(song_request), 'data-icon' => 'check' %>
@@ -31,9 +31,9 @@
         <%= link_to song_request do %>
           <h3><%= song.artist+' - '+song.title %></h3>
           <p>Dj: <%= dj.name %>
-          Singer: <%= song_request.singer_name %><br/>
-          <%= 'Key: '+song_request.key unless song_request.key.empty? %>
-          <%= 'Comments: '+song_request.comments unless song_request.comments.empty? %>
+          <br/>Singer: <%= song_request.singer_name %>
+          <%= '<br/>Key: '.html_safe+song_request.key unless song_request.key.empty? %>
+          <%= '<br/>Comments: '.html_safe+song_request.comments unless song_request.comments.empty? %>
           </p>
         <% end %>
         <%= link_to 'Restore', unarchive_song_request_path(song_request), 'data-icon' => 'delete' if song_request.archived %>
