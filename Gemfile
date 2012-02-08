@@ -1,13 +1,13 @@
 source 'http://rubygems.org'
 
+# Rails 3.1
 gem 'rails', '3.1.3'
+
+# Javasript interpreter required by server
 gem 'therubyracer', '>= 0.9.8'
 
-# Bundle edge Rails instead:
-# gem 'rails',     :git => 'git://github.com/rails/rails.git'
-
+# Sqlite database support
 gem 'sqlite3'
-
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -17,21 +17,45 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
-gem "rspec-rails", ">= 2.7.0", :group => [:development, :test]
-gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
-gem "factory_girl_rails", ">= 1.3.0", :group => :test
-gem "cucumber-rails", ">= 1.1.1", :group => :test
-gem "capybara", ">= 1.1.1", :group => :test
-gem "database_cleaner", ">= 0.6.7", :group => :test
-gem "launchy", ">= 2.0.5", :group => :test
-gem "devise", ">= 1.4.9"
+# Adds assets for Zurb Foundation
 gem "zurb-foundation", :group => :assets
-gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
+
+# Gems used only for tests and not required
+# in production environments by default.
+group :test do
+  gem "factory_girl_rails", ">= 1.3.0", :group => :test
+  gem "cucumber-rails", ">= 1.1.1", :group => :test
+  gem "capybara", ">= 1.1.1", :group => :test
+  gem "database_cleaner", ">= 0.6.7", :group => :test
+  gem "launchy", ">= 2.0.5", :group => :test
+end
+
+# Rspec for testing (and dev?)
+gem "rspec-rails", ">= 2.7.0", :group => [:development, :test]
+
+# jQuery 1.6 and jQuery UJS adapter for Rails 3.1
+gem 'jquery-rails'
+
+# Models annotated from schema
+gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
+
+# Authentication with Devise
+gem "devise", ">= 1.4.9"
+
+# Authorization with CanCan
 gem 'cancan'
+
+# Automatic Admin panel
+gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
+
+# Allow to easily switch users (for admins)
 gem 'switch_user'
+
+# Pagination 
 gem 'kaminari'
 
+
+### Not used:
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
