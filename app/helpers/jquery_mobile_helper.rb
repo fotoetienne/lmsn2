@@ -21,6 +21,21 @@ module JqueryMobileHelper
     end
   end
 
+  def jqm_bar(options = {})
+    default_class = 'ui-bar '
+    if options.include?(:class)
+      default_class << options[:class].to_s
+      options.delete(:class)
+    end
+    if options.include?(:theme)
+      default_class << 'ui-bar-'+options[:theme].to_s
+      options.delete(:theme)
+    end
+    mobile_tag :div, {:class => default_class}, options do
+      yield if block_given?
+    end
+  end
+
   protected
 
     def mobile_tag(tagname, default = {}, options = {})

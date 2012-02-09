@@ -12,9 +12,9 @@
       <%= render 'flash',:flash => flash %>
       <%= yield %>
     <% end %>
-    <%= jqm_footer :class => 'ui-bar', :theme => 'd' do %>
-      <%= switch_user_select if Rails.env.development? or (user_signed_in? and current_user.admin?) %>
-    <% end %>
+    <%= jqm_bar do %>
+      <%= switch_user_select  %>
+    <% end if (Rails.env.development? or (user_signed_in? and current_user.admin?)) and params[:su] %>
   <% end %>
 <% end %>
 <%= render :template => 'layouts/base' %>
