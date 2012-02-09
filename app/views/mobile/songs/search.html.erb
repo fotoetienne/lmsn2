@@ -1,0 +1,12 @@
+<h2><%= link_to @dj.name, @dj %>/<%= @query %></h2>
+<%= form_tag search_dj_songs_path(@dj), method: :get do %>
+  <p>
+    <%= text_field_tag :query, params[:query] %>
+    <%= submit_tag "Search", name: nil %>
+  </p>
+<% end %>
+<%= jqm_listview do %>
+  <% @songs.each do |song| %>
+    <li><%= link_to song.title+' ('+song.artist+')', new_dj_song_song_request_path(@dj,song) %></li>
+  <% end %>
+<% end %>

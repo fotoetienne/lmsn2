@@ -2,6 +2,10 @@ class Song < ActiveRecord::Base
   belongs_to :dj
   has_many :song_requests, :dependent => :destroy
   validates_uniqueness_of :identifier, :scope => :dj_id
+
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
+
 end
 # == Schema Information
 #

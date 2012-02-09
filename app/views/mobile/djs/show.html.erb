@@ -3,3 +3,10 @@
   <li><%= link_to 'Browse Artists', dj_artists_path(@dj) %></li>
   <li><%= link_to 'Browse Songs by title', dj_songs_path(@dj) %></li>
 <% end %>
+<%= form_tag search_dj_songs_path(@dj), method: :get do %>
+  <p>
+    <%= text_field_tag :query, params[:query] %>
+    <%= submit_tag "Search", name: nil %>
+  </p>
+<% end %>
+

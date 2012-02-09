@@ -13,6 +13,19 @@ class SongsController < ApplicationController
     end
   end
 
+  # GET /songs/search
+  # GET /songs/search.json
+  def search
+    @dj = Dj.find(params[:dj_id])
+    @query = params[:query]
+    @songs = @dj.songs.search(params[:query], load: true)
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @songs }
+    end
+  end
+
   # GET /songs/1
   # GET /songs/1.json
   def show

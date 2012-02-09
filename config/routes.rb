@@ -10,6 +10,7 @@ Lmsn2::Application.routes.draw do
   resources :djs do
     resources :songs do
       match 'request' => 'song_requests#new'
+      get 'search', :on => :collection
       resources :song_requests, :only => :new
     end
     resources :artists, :only => [:index,:show]

@@ -54,6 +54,9 @@ gem 'switch_user'
 # Pagination 
 gem 'kaminari'
 
+# ElasticSearch fulltext database search
+gem 'tire'
+
 
 ### Not used:
 # To use ActiveModel has_secure_password
