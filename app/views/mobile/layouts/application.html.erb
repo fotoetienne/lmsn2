@@ -6,15 +6,15 @@
 <% end %>
 
 <% content_for :body do %>
-  <div data-role="page">
+  <%= jqm_page do %>
     <%= render 'header' %>
-    <div data-role="content" data-theme="e">
+    <%= jqm_content :theme => :e do %>
       <%= render 'flash',:flash => flash %>
       <%= yield %>
-    </div>
-    <div data-role="footer" class="ui-bar" data-theme="d">
+    <% end %>
+    <%= jqm_footer :class => 'ui-bar', :theme => 'd' do %>
       <%= switch_user_select if Rails.env.development? or (user_signed_in? and current_user.admin?) %>
-    </div>
-  </div>
+    <% end %>
+  <% end %>
 <% end %>
 <%= render :template => 'layouts/base' %>
