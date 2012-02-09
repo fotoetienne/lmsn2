@@ -1,4 +1,5 @@
 <h2><%= link_to @dj.name, @dj %>/Artists</h2>
+<%#= page_entries_info(@artists).html_safe %>
 <%= paginate @artists %>
 <%= jqm_listview do %>
   <% @artists.each do |artist| %>

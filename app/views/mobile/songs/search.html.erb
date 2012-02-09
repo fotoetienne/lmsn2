@@ -5,6 +5,7 @@
     <%= submit_tag "Search", name: nil %>
   </p>
 <% end %>
+<%= page_entries_info(@songs).html_safe %>
 <%= paginate @songs %>
 <%= jqm_listview do %>
   <% @songs.each do |song| %>
