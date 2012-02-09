@@ -75,6 +75,9 @@ class SongRequestsController < ApplicationController
   # POST /song_requests.json
   def create
     @song_request = SongRequest.new(params[:song_request])
+    @dj = @song_request.dj
+    @song = @song_request.song
+    @singer = @song_request.singer
 
     respond_to do |format|
       if @song_request.save
