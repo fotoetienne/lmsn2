@@ -1,9 +1,9 @@
 <h2><%= link_to @dj.name, @dj %>/Songs by Title</h2>
 <%= paginate @songs %>
-<ul data-role="listview" data-inset="true">
-<% @songs.each do |song| %>
+<%= jqm_listview do %>
+  <% @songs.each do |song| %>
     <li><%= link_to song.title+' ('+song.artist+')', new_dj_song_song_request_path(@dj,song) %></li>
+  <% end %>
 <% end %>
-</ul>
 <%= paginate @songs %>
-<br />
+

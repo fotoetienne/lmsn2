@@ -1,11 +1,13 @@
 <h2><%= link_to @dj.name, @dj %>/Artists</h2>
 <%= paginate @artists %>
-<ul data-role="listview" data-inset="true">
-<% @artists.each do |artist| %>
-  <li><%= link_to dj_artist_path(@dj,URI.escape(artist.artist,/\W/)) do %>
-    <%= artist.artist %>
-    <%= content_tag(:span,artist.count,:class => 'ui-li-count') %>
-  <% end %></li>
+<%= jqm_listview do %>
+  <% @artists.each do |artist| %>
+    <li>
+      <%= link_to dj_artist_path(@dj,URI.escape(artist.artist,/\W/)) do %>
+        <%= artist.artist %>
+        <%= content_tag(:span,artist.count,:class => 'ui-li-count') %>
+      <% end %>
+    </li>
+  <% end %>
 <% end %>
-</ul>
 <%= paginate @artists %>

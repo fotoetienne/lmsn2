@@ -1,6 +1,6 @@
 # Based on rails-jquery-mobile gem <https://github.com/wakeless/rails-jquery-mobile>
 module JqueryMobileHelper
-  ATTRIBUTES = [:theme, :collapsed, :transition, :direction, :ajax, :role, :icon, :position, :inset]
+  ATTRIBUTES = [:theme, :collapsed, :transition, :direction, :ajax, :role, :icon, :position, :inset, :filter]
   [:page, :navbar, :content, :footer, :header, :collapsible].each do |name|
     class_eval "def jqm_#{name} (options = {}, &content)
       mobile_div('#{name}', options) do
@@ -10,7 +10,7 @@ module JqueryMobileHelper
   end
 
   def jqm_listview(options = {})
-    mobile_tag :ul, {:role => "listview"},options do
+    mobile_tag :ul, {:role => :listview, :inset => :true},options do
       yield if block_given?
     end
   end

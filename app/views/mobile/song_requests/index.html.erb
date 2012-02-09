@@ -2,7 +2,7 @@
 <% if @song_requests.empty? %>
   <h3>There are currently no song requests pending</h3>
 <% else %>
-  <ul data-role="listview">
+  <%= jqm_listview do %>
   <% @song_requests.each do |song_request| %>
     <% song,singer,dj = song_request.song,song_request.singer,song_request.dj %>
     <li>
@@ -46,6 +46,6 @@
         -->
     </li>
   <% end %>
-  </ul>
+  <% end %>
 <% end %>
 
