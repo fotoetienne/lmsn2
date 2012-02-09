@@ -5,8 +5,15 @@
     <%= submit_tag "Search", name: nil %>
   </p>
 <% end %>
+<%= paginate @songs %>
 <%= jqm_listview do %>
   <% @songs.each do |song| %>
-    <li><%= link_to song.title+' ('+song.artist+')', new_dj_song_song_request_path(@dj,song) %></li>
+    <li>
+      <%= link_to new_dj_song_song_request_path(@dj,song) do %>
+        <h2><%= song.title %></h2>
+        <p><%= song.artist %></p>
+      <% end %>
+    </li>
   <% end %>
 <% end %>
+<%= paginate @songs %>

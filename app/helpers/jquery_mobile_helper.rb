@@ -36,6 +36,12 @@ module JqueryMobileHelper
     end
   end
 
+  def jqm_field(options = {})
+    mobile_tag :div, {:role => 'fieldcontain'}, options do
+      yield if block_given?
+    end
+  end
+
   protected
 
     def mobile_tag(tagname, default = {}, options = {})
