@@ -36,6 +36,9 @@ class SingersController < ApplicationController
   # GET /singers/1/edit
   def edit
     @singer = Singer.find(params[:id])
+    if @singer.name.blank?
+      flash.now[:info] = "Set the name that you'd like the DJ to call you by."
+    end
   end
 
   # POST /singers
@@ -61,7 +64,7 @@ class SingersController < ApplicationController
 
     respond_to do |format|
       if @singer.update_attributes(params[:singer])
-        format.html { redirect_to @singer, notice: 'Singer was successfully updated.' }
+        format.html { redirect_to [:edit,@singer], notice: 'Your preferences were successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }

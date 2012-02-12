@@ -1,0 +1,20 @@
+<%= form_for(@singer) do |f| %>
+  <% if @singer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@singer.errors.count, "error") %> prohibited this singer from being saved:</h2>
+
+      <ul>
+      <% @singer.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= jqm_field do %>
+    <%= f.label :name %><em>This is what the dj will call.</em>
+    <%= f.text_field :name %>
+  <% end %>
+  <div class="actions">
+    <%= f.submit "Update Preferences" %>
+  </div>
+<% end %>
