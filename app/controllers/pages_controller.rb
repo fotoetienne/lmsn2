@@ -3,6 +3,8 @@ class PagesController < ApplicationController
     if user_signed_in?
       if current_user.dj?
         render :dj
+      elsif current_user.singer?
+        render 'singer_home'
       end
     end
   end

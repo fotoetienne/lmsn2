@@ -1,15 +1,13 @@
-<p id="notice"><%= notice %></p>
+<h2>Singer Profile</h2>
 
 <p>
   <b>Name:</b>
-  <%= @singer.name %>
+  <%= @singer.name %> (<%= link_to 'edit', [:edit,@singer] %>)
 </p>
 
 <p>
-  <b>User:</b>
-  <%= @singer.user_id %>
+  <b>Email:</b>
+  <%= @singer.user.email %> (<%= link_to 'edit', edit_user_registration_path %>)
 </p>
 
-
-<%= link_to 'Edit', edit_singer_path(@singer) %> |
-<%= link_to 'Back', singers_path %>
+<%= link_to 'Back', root_path %>

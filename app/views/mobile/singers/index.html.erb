@@ -1,0 +1,7 @@
+<h1>Singers</h1>
+
+<%= jqm_listview do %>
+  <% @singers.each do |singer| %>
+    <li><%= link_to singer.name, singer %></li>
+  <% end %>
+<% end %>
