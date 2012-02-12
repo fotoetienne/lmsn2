@@ -11,12 +11,12 @@ class User < ActiveRecord::Base
   has_one :singer, :dependent => :destroy
 
   def name
-    if role == "dj" and !dj.nil?
-      dj.name || email
-    elsif role == "singer" and !singer.nil?
-      singer.name || email
+    if role == "dj" and !dj.nil? and !dj.name.blank?
+      dj.name
+    elsif role == "singer" and !singer.nil? and !singer.name.blank?
+      singer.name
     elsif role == "admin"
-      email+"(Admin)"
+      email+" (Admin)"
     elsif role == "guest"
       "Guest"
     else
