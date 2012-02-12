@@ -14,7 +14,9 @@
     <% end %>
     <%= jqm_bar do %>
       <%= switch_user_select  %>
-    <% end if (Rails.env.development? or (user_signed_in? and current_user.admin?)) and params[:su] %>
+      Params:<%= params %><br />
+      Session:<%= session %>
+    <% end if session[:su] %>
   <% end %>
 <% end %>
 <%= render :template => 'layouts/base' %>

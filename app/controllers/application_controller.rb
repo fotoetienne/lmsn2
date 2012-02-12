@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :mobilize
+  before_filter :check_su
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to request.referer ? :back : main_app.root_path, \
@@ -17,4 +18,12 @@ class ApplicationController < ActionController::Base
       true
     end
     helper_method :mobile?
+
+    def check_su
+      if params[:su] == 'true' and (Rails.env.development? or (user_signed_in? and current_user.admin?))
+        session[:su] = true
+      elsif params[:su] == 'false'
+        session[:su] = nil
+      end
+  end
 end
