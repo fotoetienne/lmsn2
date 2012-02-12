@@ -15,6 +15,10 @@ module JqueryMobileHelper
     end
   end
 
+  def li_link_to(text,path,options={})
+    content_tag :li, link_to(text,path,jqm_parse_options(options))
+  end
+
   def jqm_numberedlist(options)
     mobile_tag :ol, {:role => "listview", :theme => "g"}, options do
       yield if block_given?
