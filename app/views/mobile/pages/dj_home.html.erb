@@ -1,4 +1,4 @@
 <%= jqm_listview do %>
   <%= li_link_to "Pending Song Requests", song_requests_path %>
-  <%= li_link_to "My Account", current_user.singer %>
+  <%= li_link_to "My Account", [:edit,current_user.dj] %>
 <% end %>

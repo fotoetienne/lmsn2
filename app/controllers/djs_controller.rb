@@ -61,7 +61,7 @@ class DjsController < ApplicationController
 
     respond_to do |format|
       if @dj.update_attributes(params[:dj])
-        format.html { redirect_to @dj, notice: 'Dj was successfully updated.' }
+        format.html { redirect_to [:edit,@dj], notice: 'Your preferences were successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
