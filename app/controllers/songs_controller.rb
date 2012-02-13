@@ -18,7 +18,12 @@ class SongsController < ApplicationController
   def search
     @dj = Dj.find(params[:dj_id])
     @query = params[:query]
-    @songs = @dj.songs.search(params[:query], :page => params[:page], :per_page => 100, load: true)
+    @songs = Song.search :page => params[:page], :per_page => 100 do |search|
+      search.query do |query|
+        query.string @query
+      end
+      search.filter :terms, :dj_id => [@dj.id]
+    end
 
     respond_to do |format|
       format.html # index.html.erb
