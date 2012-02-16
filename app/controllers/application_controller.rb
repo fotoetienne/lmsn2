@@ -20,10 +20,10 @@ class ApplicationController < ActionController::Base
     helper_method :mobile?
 
     def check_su
-      if params[:su] == 'true' and (Rails.env.development? or (user_signed_in? and current_user.admin?))
-        session[:su] = true
-      elsif params[:su] == 'false'
+      if params[:su] == 'false'
         session[:su] = nil
+      elsif params[:su] and can? :switch, User 
+        session[:su] = true
       end
   end
 end

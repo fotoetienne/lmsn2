@@ -4,6 +4,7 @@ class Ability
   def initialize(user)
     user ||= User.new(:role => 'guest') # guest user (not logged in)
     can :manage, User, :id => user.id
+    cannot :switch, User
     can [:read, :search], [Dj, Song]
     can [:create, :read], SongRequest
     if user.admin?
@@ -18,6 +19,9 @@ class Ability
       can :manage, Singer, :user_id => user.id
       can :manage, SongRequest, :singer_id => user.singer.id
       can :read, [Song, Dj]
+    end
+    if Rails.env.development?
+      can :switch, User
     end
     
     # The first argument to `can` is the action you are giving the user permission to do.
