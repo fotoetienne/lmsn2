@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120113164859) do
+ActiveRecord::Schema.define(:version => 20120216200630) do
 
   create_table "djs", :force => true do |t|
     t.string   "name"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20120113164859) do
     t.string   "promocode"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "songlist"
   end
 
   create_table "rails_admin_histories", :force => true do |t|
@@ -51,7 +52,7 @@ ActiveRecord::Schema.define(:version => 20120113164859) do
     t.string   "name"
     t.string   "key"
     t.string   "comments"
-    t.boolean  "archived",      :default => false
+    t.boolean  "archived",   :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

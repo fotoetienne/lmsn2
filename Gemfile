@@ -57,6 +57,9 @@ gem 'kaminari'
 # ElasticSearch fulltext database search
 gem 'tire'
 
+# Carrierwave for file uploads
+gem 'carrierwave'
+
 
 ### Not used:
 # To use ActiveModel has_secure_password

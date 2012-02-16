@@ -4,6 +4,7 @@ class Dj < ActiveRecord::Base
   belongs_to :user, :dependent => :destroy
   has_many :songs, :dependent => :destroy
   has_many :song_requests, :dependent => :destroy
+  mount_uploader :songlist, SonglistUploader
 
   def load_songlist(fn)
     songlist = parse_csv(fn)
