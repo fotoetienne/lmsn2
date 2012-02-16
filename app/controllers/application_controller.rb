@@ -25,5 +25,25 @@ class ApplicationController < ActionController::Base
       elsif params[:su] and can? :switch, User 
         session[:su] = true
       end
-  end
+    end
+
+    def current_role
+      if user_signed_in?
+        current_user.role
+      else
+        :guest
+      end
+    end
+    helper_method :current_role
+
+    def current_dj
+        current_user.dj if current_role == 'dj'
+    end
+    helper_method :current_dj
+
+    def current_singer
+        current_user.singer if current_role == 'singer'
+    end
+    helper_method :current_singer
+
 end

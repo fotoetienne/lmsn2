@@ -1,11 +1,12 @@
 class PagesController < ApplicationController
   def index
-    if user_signed_in?
-      if current_user.dj?
-        render 'dj_home'
-      elsif current_user.singer?
-        render 'singer_home'
+    if current_dj
+      if current_dj.songs.empty?
+        flash.now[:info] = "Welcome! This page lets you manage your DJ account from a PC or mobile device. Visit the songlist manager and add some songs to get started!"
       end
+      render 'dj_home'
+    elsif current_singer
+      render 'singer_home'
     end
   end
 
