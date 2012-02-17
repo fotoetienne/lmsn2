@@ -15,6 +15,7 @@ class Ability
       can :manage, Song, :dj_id => user.dj.id
       can :manage, SongRequest, :dj_id => user.dj.id
       can :read,   Singer
+      can :manage, :songlist
     elsif user.singer?
       can :manage, Singer, :user_id => user.id
       can :manage, SongRequest, :singer_id => user.singer.id

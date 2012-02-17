@@ -1,0 +1,36 @@
+<h2>Import Songs</h2>
+<p>We can automatically import songs from a csv file. If your songlist is in a different format, don't worry. Go ahead and upload your file, then <%= mail_to 'contact@letmesingnow.com', 'contact us', :subject => 'Help loading songlist' %> and we'll have you rolling in a jiffy.</p>
+<%= jqm_collapsible :collapsed => @dj.songlist?, 'data-content-theme' => :e do %>
+  <h3>Upload<% if @dj.songlist? %>
+    [<%= @dj.songlist.name %>]
+  <% end %></h3>
+  <p>Your csv file should have column headings for 'Artist' and 'Title'. Optionally, you may also have columns for 'Song ID', 'Disc', and/or 'Notes'.<p/>
+  <%= form_for @dj, :url => songlist_path, :html => {:multipart => true} do |f| %>
+    <%= jqm_field do %>
+      <%= f.label :songlist, "Choose a csv file:" %>
+      <%= f.file_field :songlist %>
+    <% end %>
+    <%= jqm_field do %>
+      <%= f.label :remote_songlist_url, "or load from a URL" %>
+      <%= f.text_field :remote_songlist_url %>
+    <% end %>
+      <%= f.submit "Upload Songlist" %>
+  <% end %>
+<% end %>
+<%= jqm_collapsible :collapsed => !@dj.songlist?, 'data-content-theme' => :e do %>
+  <h3>Import</h3>
+  <% if @dj.songlist? %>
+    <strong>Import songs from <%= @dj.songlist.name %></strong>
+    <%= form_tag load_songlist_path do %>
+      <%= jqm_field do %>
+        <p>You currently have <%= @dj.songs.count %> songs. Would you like to replace these?</p>
+        <%= label_tag :replace, 'Replace current songs' %>
+        <%= check_box_tag :replace, :true %>
+      <% end if !@dj.songs.empty?%>
+      <%= submit_tag("Import Songs") %>
+      <em>The import may take a while, depending on the size of your songlist</em>
+    <% end %>
+  <% else %>
+    <strong>Upload a file first.</strong>
+  <% end %>
+<% end %>

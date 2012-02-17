@@ -6,8 +6,13 @@ Lmsn2::Application.routes.draw do
   end
 
   resources :singers
+  
+  resource :songlist do
+    get 'import','export'
+    post 'load'
+  end
 
-  resources :djs do
+  resources :djs, :except => [:new, :create] do
     resources :songs do
       match 'request' => 'song_requests#new'
       get 'search', :on => :collection

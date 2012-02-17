@@ -6,8 +6,12 @@ class Dj < ActiveRecord::Base
   has_many :song_requests, :dependent => :destroy
   mount_uploader :songlist, SonglistUploader
 
-  def load_songlist(fn)
-    songlist = parse_csv(fn)
+  def load_songlist(fn, type=:csv)
+    if type == :csv
+      songlist = parse_csv(fn)
+    elsif type == :xls
+      songlist = parse_xls(fn)
+    end
     self.songs.create(songlist)
   end 
 
@@ -38,7 +42,9 @@ class Dj < ActiveRecord::Base
       this_song = {
       :artist => row[:artist] || "Unknown Artist",
       :title => row[:title] || row[:song],
-      :identifier => row[:identifier] || row[:id] || row[:song_id] || nil}
+      :identifier => row[:identifier] || row[:id] || row[:song_id] || nil,
+      :disc => row[:disc] || row[:disk] || nil,
+      :notes => row[:notes] || row[:note] || nil}
       songs << this_song unless this_song[:title].nil?
     end
     return songs

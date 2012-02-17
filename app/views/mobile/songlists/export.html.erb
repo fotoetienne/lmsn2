@@ -1,0 +1,4 @@
+<h2>Export Songlist</h2>
+<%= jqm_listview do %>
+  <%= li_link_to "Download json version", dj_songs_path(@dj,:format => :json), :rel => :external %>
+<% end %>

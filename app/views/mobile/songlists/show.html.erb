@@ -1,0 +1,6 @@
+<h2>Songlist Manager</h2>
+<%= jqm_listview do %>
+  <%= li_link_to "Browse My Songs", dj_path(@dj) unless @dj.songs.empty? %>
+  <%= li_link_to "Import Songlist", import_songlist_path %>
+  <%= li_link_to "Export Songlist", export_songlist_path %>
+<% end %>
