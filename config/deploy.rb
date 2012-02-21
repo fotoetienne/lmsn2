@@ -13,7 +13,8 @@ set :user,            "deployer"
 set :group,           "staff"
 set :use_sudo,        false
 
-server 'localhost', :web; :app, :db, :primary => true
+server 'localhost', :web; :app
+role :db, 'localhost', :primary => true
 # role :web,    "letmesingnow.com"
 # role :app,    "letmesingnow.com"
 # role :db,     "letmesingnow.com", :primary => true
@@ -29,9 +30,9 @@ set(:previous_revision) { capture("cd #{current_path}; git rev-parse --short HEA
 default_environment["RAILS_ENV"] = 'production'
 
 # Use our ruby-1.9.3-p0@lmsn2 gemset
-default_environment["PATH"]         = "--"
-default_environment["GEM_HOME"]     = "--"
-default_environment["GEM_PATH"]     = "--"
+default_environment["PATH"]         = "/usr/local/rvm/gems/ruby-1.9.3-p0@lmsn2/bin:/usr/local/rvm/gems/ruby-1.9.3-p0@global/bin:/usr/local/rvm/rubies/ruby-1.9.3-p0/bin:/usr/local/rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+default_environment["GEM_HOME"]     = "/usr/local/rvm/gems/ruby-1.9.3-p0@lmsn2"
+default_environment["GEM_PATH"]     = "/usr/local/rvm/gems/ruby-1.9.3-p0@lmsn2:/usr/local/rvm/gems/ruby-1.9.3-p0@global"
 default_environment["RUBY_VERSION"] = "ruby-1.9.3-p0"
 
 default_run_options[:shell] = 'bash'
@@ -88,8 +89,9 @@ namespace :deploy do
       mkdir -p #{latest_release}/tmp &&
       ln -s #{shared_path}/log #{latest_release}/log &&
       ln -s #{shared_path}/system #{latest_release}/public/system &&
-      ln -s #{shared_path}/pids #{latest_release}/tmp/pids &&
+      ln -s #{shared_path}/pids #{latest_release}/tmp/pids
     CMD
+    # ln -s #{shared_path}/pids #{latest_release}/tmp/pids &&
     # ln -sf #{shared_path}/database.yml #{latest_release}/config/database.yml
 
     if fetch(:normalize_asset_timestamps, true)
