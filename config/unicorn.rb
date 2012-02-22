@@ -3,7 +3,7 @@ env = ENV["RAILS_ENV"] || "development"
 
 # See http://unicorn.bogomips.org/Unicorn/Configurator.html for complete
 # documentation.
-worker_processes 4
+worker_processes 5
 
 # listen on both a Unix domain socket and a TCP port,
 # we use a shorter backlog for quicker failover when busy
@@ -13,7 +13,7 @@ listen "/tmp/lmsn.socket", :backlog => 64
 preload_app true
 
 # nuke workers after 30 seconds instead of 60 seconds (the default)
-timeout 30
+timeout 600
 
 pid "/tmp/unicorn.lmsn.pid"
 
