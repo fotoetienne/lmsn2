@@ -7,7 +7,7 @@ Lmsn2::Application.routes.draw do
 
   resources :singers
   
-  resource :songlist, :except => [:update, :edit, :delete] do
+  resource :songlist, :except => [:create, :edit, :delete] do
     get 'import','export'
     post 'load'
   end
