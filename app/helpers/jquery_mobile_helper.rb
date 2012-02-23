@@ -1,6 +1,6 @@
 # Based on rails-jquery-mobile gem <https://github.com/wakeless/rails-jquery-mobile>
 module JqueryMobileHelper
-  ATTRIBUTES = [:theme, :collapsed, :transition, :direction, :ajax, :role, :icon, :position, :inset, :filter]
+  ATTRIBUTES = [:theme, :collapsed, :transition, :direction, :ajax, :role, :icon, :iconpos, :position, :inset, :filter]
   [:page, :navbar, :content, :footer, :header, :collapsible].each do |name|
     class_eval "def jqm_#{name} (options = {}, &content)
       mobile_div('#{name}', options) do
@@ -17,6 +17,10 @@ module JqueryMobileHelper
 
   def li_link_to(text,path,options={})
     content_tag :li, link_to(text,path,jqm_parse_options(options))
+  end
+
+  def jqm_link_to(text,path,options={})
+    link_to(text,path,jqm_parse_options(options))
   end
 
   def jqm_numberedlist(options)

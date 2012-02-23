@@ -1,8 +1,8 @@
 <div data-role="header" data-theme="b">
   <h1> </h1>
-  <%= link_to 'LetMeSingNow, llc', root_url, 'data-icon' => 'star', 'data-theme'=>'e' %>
+  <%= jqm_link_to 'LetMeSingNow, llc', root_url, :icon => :star, :theme => :e, :direction => :reverse %>
   <% if user_signed_in? %>
-    <%= link_to(current_user.name, destroy_user_session_path, 'data-icon' => 'delete', 'data-iconpos' => 'right') %>
+    <%= jqm_link_to(current_user.name, destroy_user_session_path, :icon => :delete, :iconpos => :right) %>
   <% else %> 
     <%= link_to 'Login', new_user_session_path %>
   <% end %>
