@@ -9,7 +9,7 @@ class SonglistsController < ApplicationController
   # GET /songlist
   def show
     if @dj.songs.empty?
-      flash.now[:info] = "Upload a songlist to get started."
+      flash.now[:info] = "Import a songlist to get started."
     end
   end
 
@@ -21,9 +21,9 @@ class SonglistsController < ApplicationController
   def export
   end
 
-  # POST /songlist
+  # PUT /songlist
   # upload file
-  def create
+  def update
     @dj.update_attributes(params[:dj])
     respond_to do |format|
       if @dj.songlist
@@ -40,7 +40,7 @@ class SonglistsController < ApplicationController
   # load songs from file into @dj.songs
   def load
     if params[:replace]
-      @dj.songs.delete_all
+      @dj.songs.destroy_all
     end
     
     respond_to do |format|
@@ -53,19 +53,6 @@ class SonglistsController < ApplicationController
       end
     end
   end
-
- ## PUT /songlist
- #def update
- #  respond_to do |format|
- #    if @dj.update_attributes(params[:dj])
- #      format.html { redirect_to import_songlist_path, notice: 'Songlist successfully uploaded' }
- #      format.json { head :ok }
- #    else
- #      format.html { render action: "upload" }
- #      format.json { render json: @dj.errors, status: :unprocessable_entity }
- #    end
- #  end
- #end
 
  ## DELETE /songlist
  #def destroy
