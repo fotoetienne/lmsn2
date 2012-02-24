@@ -6,6 +6,12 @@ class Song < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
+  tire.mapping :_routing => { :required => :true, :path => :dj_id } do
+    indexes :id,           :index    => :not_analyzed
+    indexes :dj_id,        :index    => :not_analyzed
+    indexes :artist,       :analyzer => 'snowball', :boost => 100
+    indexes :title,        :analyzer => 'snowball'
+  end
 end
 # == Schema Information
 #
