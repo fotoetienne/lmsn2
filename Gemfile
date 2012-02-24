@@ -55,7 +55,7 @@ gem 'switch_user'
 gem 'kaminari'
 
 # ElasticSearch fulltext database search
-gem 'tire'
+gem 'tire', :git => 'git://github.com/karmi/tire.git'
 
 # Carrierwave for file uploads
 gem 'carrierwave'
