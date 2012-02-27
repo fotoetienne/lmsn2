@@ -20,7 +20,7 @@
 <%= jqm_collapsible :collapsed => !@dj.songlist?, 'data-content-theme' => :e do %>
   <h3>Import</h3>
   <% if @dj.songlist? %>
-    <strong>Import songs from <%= @dj.songlist.name %></strong>
+    <strong>Import songs from <%= link_to @dj.songlist.name, @dj.songlist_url.to_s, :rel => :external %></strong>
     <%= form_tag load_songlist_path do %>
       <%= jqm_field do %>
         <p>You currently have <%= @dj.songs.count %> songs. Would you like to replace these?</p>
