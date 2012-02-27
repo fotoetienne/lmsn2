@@ -24,13 +24,12 @@ class SonglistsController < ApplicationController
   # PUT /songlist
   # upload file
   def update
-    @dj.update_attributes(params[:dj])
     respond_to do |format|
-      if @dj.songlist
-        format.html { redirect_to import_songlist_path, notice: 'Songlist successfully uploaded' }
+      unless @dj.update_attributes(params[:dj])
+        format.html { render action: :import }
         format.json { head :ok }
       else
-        format.html { render action: :import, notice: 'Problem uploading songlist' }
+        format.html { render action: :import }
         format.json { render json: @dj.errors, status: :unprocessable_entity }
       end
     end
