@@ -86,10 +86,12 @@ namespace :deploy do
     # save empty folders
     run <<-CMD
       rm -rf #{latest_release}/log #{latest_release}/public/system #{latest_release}/tmp/pids &&
+      rm -rf #{latest_release}/public/uploads &&
       mkdir -p #{latest_release}/public &&
       mkdir -p #{latest_release}/tmp &&
       ln -s #{shared_path}/log #{latest_release}/log &&
       ln -s #{shared_path}/system #{latest_release}/public/system &&
+      ln -s #{shared_path}/uploads #{latest_release}/public/uploads &&
       ln -s #{shared_path}/pids #{latest_release}/tmp/pids
     CMD
     # ln -s #{shared_path}/pids #{latest_release}/tmp/pids &&
