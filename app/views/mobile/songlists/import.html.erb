@@ -1,17 +1,17 @@
 <h2>Import Songs</h2>
-<p>We can automatically import songs from a csv file. If your songlist is in a different format, don't worry. Go ahead and upload your file, then <%= mail_to 'contact@letmesingnow.com', 'contact us', :subject => 'Help loading songlist' %> and we'll have you rolling in a jiffy.</p>
+<p>We can automatically import songs from a csv file. Don't worry if you don't know what this means, or your songlist is in a different format. Go ahead and upload your file, then <%= mail_to 'contact@letmesingnow.com', 'contact us', :subject => 'Help loading songlist' %> and we'll have you rolling in a jiffy.</p>
 <%= jqm_collapsible :collapsed => @dj.songlist?, 'data-content-theme' => :e do %>
   <h3>Upload<% if @dj.songlist? %>
     [<%= @dj.songlist.name %>]
   <% end %></h3>
   <p>Your csv file should have column headings for 'Artist' and 'Title'. Optionally, you may also have columns for 'Song ID', 'Disc', and/or 'Notes'.<p/>
-  <%= form_for @dj, :url => songlist_path, :html => {:multipart => true} do |f| %>
+  <%= form_for @dj, :url => songlist_path, :html => {:multipart => true, 'data-ajax' => false} do |f| %>
     <%= jqm_field do %>
       <%= f.label :songlist, "Choose a csv file:" %>
       <%= f.file_field :songlist %>
     <% end %>
     <%= jqm_field do %>
-      <%= f.label :remote_songlist_url, "or load from a URL" %>
+      <%= f.label :remote_songlist_url, "or load from a URL (if your songlist is already online somewhere):" %>
       <%= f.text_field :remote_songlist_url %>
     <% end %>
       <%= f.submit "Upload Songlist" %>
