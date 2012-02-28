@@ -9,6 +9,9 @@ gem 'therubyracer', '>= 0.9.8'
 # Sqlite database support
 gem 'sqlite3'
 
+# MySQL database support
+gem 'mysql2'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
