@@ -92,10 +92,9 @@ namespace :deploy do
       ln -s #{shared_path}/log #{latest_release}/log &&
       ln -s #{shared_path}/system #{latest_release}/public/system &&
       ln -s #{shared_path}/uploads #{latest_release}/public/uploads &&
-      ln -s #{shared_path}/pids #{latest_release}/tmp/pids
+      ln -s #{shared_path}/pids #{latest_release}/tmp/pids &&
+      ln -sf #{shared_path}/database.yml #{latest_release}/config/database.yml
     CMD
-    # ln -s #{shared_path}/pids #{latest_release}/tmp/pids &&
-    # ln -sf #{shared_path}/database.yml #{latest_release}/config/database.yml
 
     if fetch(:normalize_asset_timestamps, true)
       stamp = Time.now.utc.strftime("%Y%m%d%H%M.%S")
