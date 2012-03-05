@@ -6,7 +6,7 @@ class Dj < ActiveRecord::Base
   has_many :song_requests, :dependent => :destroy
   mount_uploader :songlist, SonglistUploader
 
-  def load_songlist(fn, type=:csv)
+  def slow_load_songlist(fn, type=:csv)
     if type == :csv
       songlist = parse_csv(fn)
     elsif type == :xls
@@ -16,10 +16,83 @@ class Dj < ActiveRecord::Base
   end 
 
   def load_random_songlist(length=1000)
-    songlist = parse_csv(random_songlist(length))
-    self.songs.create(songlist)
+    load_songlist(random_songlist(length))
   end 
 
+  def load_songlist(fn,type=:csv)
+    if type == :csv
+      songlist = parse_csv(fn)
+    elsif type == :xls
+      songlist = parse_xls(fn)
+    end
+    conn = ActiveRecord::Base.connection
+    create_time = Time.now
+    time = conn.quote(Time.now.to_s(:db))
+    inserts = []
+    i = 0
+    songlist.each do |song|
+      artist = conn.quote(song[:artist])
+      title = conn.quote(song[:title])
+      identifier = conn.quote(song[:identifier])
+      inserts.push "(#{[self.id,artist,title,identifier,time,time].join(',')})"
+      i += 1
+      if i == 1000
+        conn.execute "INSERT INTO songs (dj_id,artist,title,identifier,created_at,updated_at) VALUES #{inserts.join(',')}"
+        inserts = []
+        i = 0
+      end
+    end
+    unless inserts.empty?
+      conn.execute "INSERT INTO songs (dj_id,artist,title,identifier,created_at,updated_at) VALUES #{inserts.join(',')}"
+    end
+    #new_songs = self.songs.all(:conditions => {:created_at => time},:select => [:dj_id,:id,:artist,:title])
+    #Song.index.import new_songs
+    self.songs.find_in_batches(:conditions => "created_at = "+time,:select => [:dj_id,:id,:artist,:title]) do |song_batch|
+      Song.index.import song_batch
+    end
+  end 
+
+  def destroy_all_songs
+    self.songs.delete_all
+    self.song_requests.delete_all
+    self.clear_search_index
+  end
+
+  def rebuild_search_index
+    clear_search_index
+    build_search_index
+  end
+
+  def build_search_index
+    # Adds all songs for this dj into the elasticsearch index
+    self.songs.find_in_batches(:select => [:dj_id,:id,:artist,:title]) do |song_batch|
+      Song.index.import song_batch
+    end
+  end
+
+  def clear_search_index
+    # Clears all songs for the current dj from the elasticsearch index
+  
+    #query_string = "_query?routing=#{id}?q=dj_id:#{id}"
+    #query_url = [Tire::Configuration.url,Song.index_name,query_string].join('/')
+    #result = RestClient::Request.new(:method => :delete, :url => query_url).execute
+    query_string = "_query?routing=#{id}"
+    query_url = [Tire::Configuration.url,Song.index_name,query_string].join('/')
+    payload = { term: {dj_id: id} }.to_json
+    result = RestClient::Request.new(:method => :delete, :url => query_url, :payload => payload).execute
+    #Song.search(:routing => self.id, :delete => true) { query { string '*' }; filter :terms,:dj_id => [self.id] }
+    #Tire.search(Song.index_name, :routing => dj.id, :delete => true) { query { string '*' }; filter :terms,:dj_id => [dj.id] }
+  end
+
+  def search_songs(search_string='*',page=1)
+    @songs = Song.search :page => page, :per_page => 100, :routing => id do |search|
+      search.query do |query|
+        query.string search_string
+      end 
+      search.filter :terms, :dj_id => [id]
+    end
+  end
+  
   def artists
     self.songs.select("songs.artist,count(*) as count").group(:artist)
 #   self.songs.count(:group => :artist)
