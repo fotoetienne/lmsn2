@@ -39,7 +39,7 @@ class SonglistsController < ApplicationController
   # load songs from file into @dj.songs
   def load
     if params[:replace]
-      @dj.songs.destroy_all
+      @dj.destroy_all_songs
     end
     
     respond_to do |format|
