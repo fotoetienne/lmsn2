@@ -1,6 +1,6 @@
 class Song < ActiveRecord::Base
   belongs_to :dj
-  has_many :song_requests, :dependent => :destroy
+  has_many :song_requests#, :dependent => :destroy
 # validates_uniqueness_of :identifier, :scope => :dj_id
 
   include Tire::Model::Search
@@ -12,6 +12,11 @@ class Song < ActiveRecord::Base
     indexes :artist,       :analyzer => 'snowball', :boost => 100
     indexes :title,        :analyzer => 'snowball'
   end
+
+  def to_indexed_json
+    to_json :only => [:id, :dj_id, :artist, :title]
+  end
+
 end
 # == Schema Information
 #
