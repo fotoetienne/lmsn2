@@ -50,6 +50,12 @@ class Dj < ActiveRecord::Base
     self.songs.find_in_batches(:conditions => "created_at = "+time,:select => [:dj_id,:id,:artist,:title]) do |song_batch|
       Song.index.import song_batch
     end
+
+    if self.songs.count != self.search_songs.total
+      rebuild_search_index
+    end
+  
+    return true
   end 
 
   def destroy_all_songs
