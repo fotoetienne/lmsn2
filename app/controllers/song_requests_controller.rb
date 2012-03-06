@@ -11,12 +11,12 @@ class SongRequestsController < ApplicationController
         @song_requests = current_user.account.song_requests.where(:archived => false)
         template = current_user.role+'_index'
       else
-        #template = 'guest_index'
-        redirect_to :root and return false
+        template = 'guest_index'
+        #redirect_to :root and return false
       end 
     else
-      #template = 'guest_index'
-      redirect_to :root and return false
+      template = 'guest_index'
+      #redirect_to :root and return false
     end
 
     respond_to do |format|
