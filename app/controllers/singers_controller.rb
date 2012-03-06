@@ -64,7 +64,7 @@ class SingersController < ApplicationController
 
     respond_to do |format|
       if @singer.update_attributes(params[:singer])
-        format.html { redirect_to [:edit,@singer], notice: 'Your preferences were successfully updated.' }
+        format.html { redirect_to root_path, notice: 'Your preferences were successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
