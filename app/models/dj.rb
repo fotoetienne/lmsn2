@@ -59,9 +59,14 @@ class Dj < ActiveRecord::Base
   end 
 
   def destroy_all_songs
-    self.songs.delete_all
+    self.delete_all_songs
     self.song_requests.delete_all
     self.clear_search_index
+  end
+
+  def delete_all_songs
+    conn = ActiveRecord::Base.connection
+    conn.execute "DELETE FROM songs WHERE dj_id=#{id}"
   end
 
   def rebuild_search_index
