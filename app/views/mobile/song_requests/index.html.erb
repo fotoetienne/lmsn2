@@ -10,6 +10,7 @@
         <%= link_to song_request do %>
           <h3><%= song.artist+' - '+song.title %></h3>
           <p>Singer: <%= song_request.singer_name %>
+          <i>(Requested <%= time_ago_in_words(song_request.created_at) %> ago)</i>
           <%= '<br/>Key: '.html_safe+song_request.key unless song_request.key.empty? %>
           <%= '<br/>Comments: '.html_safe+song_request.comments unless song_request.comments.empty? %>
           </p>
