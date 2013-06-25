@@ -122,7 +122,7 @@ class Dj < ActiveRecord::Base
 
   def parse_csv(csvfile)
     songs = []
-    CSV.foreach(csvfile,{:headers => true, :skip_blanks => true, :header_converters => :symbol}) do |row|
+    CSV.foreach(csvfile,{:headers => true, :skip_blanks => true, :header_converters => :symbol, :encoding => 'windows-1251:utf-8'}) do |row|
       this_song = {
       :artist => row[:artist] || "Unknown Artist",
       :title => row[:title] || row[:song],
