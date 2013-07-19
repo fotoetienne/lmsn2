@@ -51,7 +51,9 @@ module Lmsn2
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.assets.precompile += ['mobile.js']
+    config.assets.precompile += ['mobile.js','mobile.css']
+    # Add Rails Admin assets (required)
+    config.assets.precompile += ['rails_admin/rails_admin.css', 'rails_admin/rails_admin.js']
     config.assets.initialize_on_precompile = false
   end
 end
