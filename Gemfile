@@ -23,6 +23,9 @@ end
 # Adds assets for Zurb Foundation
 gem "zurb-foundation", :group => :assets
 
+#Thin dev server
+gem 'thin', :group => :development
+
 # Gems used only for tests and not required
 # in production environments by default.
 group :test do
