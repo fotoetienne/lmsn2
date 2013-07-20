@@ -1,0 +1,23 @@
+<h2>DJ Preferences</h2>
+<%= form_for(@dj) do |f| %>'
+  <% if @dj.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@dj.errors.count, "error") %> prohibited this dj from being saved:</h2>
+      <ul>
+        <% @dj.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= jqm_field do %>
+    <%= f.label :name, "DJ name: this is how singers will look up your songlist." %>
+    <%= f.text_field :name %>
+  <% end %>
+
+  <%= jqm_field do %>
+    <%= f.label :public, "Make your songlist public" %>
+    <%= f.check_box :public %>
+  <% end %>
+  <%= f.submit "Save" %>
+<% end %>

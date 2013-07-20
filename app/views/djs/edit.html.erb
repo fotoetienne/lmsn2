@@ -16,6 +16,10 @@
     <%= f.label "DJ name: this is how singers will look up your songlist." %>
     <%= f.text_field :name, :class => 'input-text' %>
   </div>
+  <div class="field">
+    <%= f.label "Make your songlist public" %><br />
+    <%= f.check_box :public %>
+  </div>
 <!--  <div class="field">
     <%= f.label :user_id %><br />
     <%= f.number_field :user_id %>
