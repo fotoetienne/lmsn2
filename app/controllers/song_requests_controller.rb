@@ -1,4 +1,5 @@
 class SongRequestsController < ApplicationController
+ #before_filter :authenticate_user!
   load_and_authorize_resource
   # GET /song_requests
   # GET /song_requests.json
@@ -54,6 +55,8 @@ class SongRequestsController < ApplicationController
     if user_signed_in? and current_user.role == 'singer'
       request_params[:singer_id] = current_user.singer.id
       @singer = current_user.singer
+    else
+      redirect_to new_user_registration_path, notice: 'Please create an account or sign in before making a song request.' and return false
     end
     @song_request = SongRequest.new(request_params)
 
