@@ -26,6 +26,9 @@ gem "zurb-foundation", :group => :assets
 #Thin dev server
 gem 'thin', :group => :development
 
+# Speed up dev mode
+gem 'rails-dev-tweaks', '~> 0.6.1', :group => :development
+
 # Gems used only for tests and not required
 # in production environments by default.
 group :test do
