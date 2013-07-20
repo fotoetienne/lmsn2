@@ -10,7 +10,7 @@ class SongRequestsController < ApplicationController
         template = 'admin_index'
       elsif current_user.dj? or current_user.singer?
         @song_requests = current_user.account.song_requests.where(:archived => false)
-        @archived_song_requests = current_user.account.song_requests.where(:archived => true)
+        @archived_song_requests = current_user.account.song_requests.where(:archived => true).last(10).reverse
         template = current_user.role+'_index'
       else
         template = 'guest_index'
@@ -56,7 +56,7 @@ class SongRequestsController < ApplicationController
     if user_signed_in? and current_user.role == 'singer'
       request_params[:singer_id] = current_user.singer.id
       @singer = current_user.singer
-    else
+    elsif not user_signed_in?
       redirect_to new_user_registration_path, notice: 'Please create an account or sign in before making a song request.' and return false
     end
     @song_request = SongRequest.new(request_params)
