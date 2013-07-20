@@ -3,7 +3,15 @@ class DjsController < ApplicationController
   # GET /djs
   # GET /djs.json
   def index
-    @djs = Dj.all
+    if user_signed_in?
+      if current_user.admin? or current_user.dj?
+        @djs = Dj.all
+      else
+        @djs = Dj.where(:public => true)
+      end
+    else
+      @djs = Dj.where(:public => true)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
