@@ -48,5 +48,26 @@
     </li>
   <% end %>
   <% end %>
+  <% if current_user.dj? %>
+    <%= jqm_collapsible :collapsed => true, 'data-content-theme' => :e do %>
+    <h3>Archived Requests</h3>
+    <%= jqm_listview do %>
+    <% @archived_song_requests.each do |song_request| %>
+      <% song,singer,dj = song_request.song,song_request.singer,song_request.dj %>
+      <li>
+        <%= link_to song_request do %>
+          <h3><%= song.artist+' - '+song.title %></h3>
+          <p>Singer: <%= song_request.singer_name %>
+          <i>(Requested <%= time_ago_in_words(song_request.created_at) %> ago)</i>
+          <%= '<br/>Key: '.html_safe+song_request.key unless song_request.key.empty? %>
+          <%= '<br/>Comments: '.html_safe+song_request.comments unless song_request.comments.empty? %>
+          </p>
+        <% end %>
+        <%= link_to 'Restore', unarchive_song_request_path(song_request), 'data-icon' => 'back' %>
+      </li>
+    <% end %>
+    <% end %>
+    <% end %>
+  <% end %>
 <% end %>
 

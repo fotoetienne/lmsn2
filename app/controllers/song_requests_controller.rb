@@ -10,6 +10,7 @@ class SongRequestsController < ApplicationController
         template = 'admin_index'
       elsif current_user.dj? or current_user.singer?
         @song_requests = current_user.account.song_requests.where(:archived => false)
+        @archived_song_requests = current_user.account.song_requests.where(:archived => true)
         template = current_user.role+'_index'
       else
         template = 'guest_index'
